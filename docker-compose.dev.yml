@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  dnar-backend:
+    container_name: dnar-backend-dev
+    command: yarn dev -L
