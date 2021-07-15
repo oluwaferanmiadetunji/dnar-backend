@@ -3,8 +3,6 @@ const { toJSON, paginate } = require('../../plugins');
 
 const employeeRolesSchema = mongoose.Schema(
   {
-    _id: Number,
-
     employee_id: Number,
 
     role_id: Number,
@@ -12,9 +10,7 @@ const employeeRolesSchema = mongoose.Schema(
   {
     timestamps: true,
   },
-  { _id: false },
 );
-
 
 employeeRolesSchema.plugin(toJSON);
 employeeRolesSchema.plugin(paginate);

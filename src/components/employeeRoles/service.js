@@ -14,10 +14,15 @@ const createEmployeeRole = async (body) => {
 
 /**
  * Get all employee roles
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const queryEmployeeRoles = async () => {
-  const employeeRoles = await Model.find({});
+const queryEmployeeRoles = async (filter, options) => {
+  const employeeRoles = await Model.paginate(filter, options);
   return employeeRoles;
 };
 
@@ -28,6 +33,23 @@ const queryEmployeeRoles = async () => {
  */
 const getEmployeeRoleById = async (id) => {
   return Model.findById(id);
+};
+
+/**
+ * Update employee role by id
+ * @param {ObjectId} id
+ * @param {Object} body
+ * @returns {Promise<Model>}
+ */
+const updateEmployeeRoleById = async (id, body) => {
+  const employeeRole = await getEmployeeRoleById(id);
+  if (!employeeRole) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Employee Role not found');
+  }
+
+  Object.assign(employeeRole, body);
+  await employeeRole.save();
+  return employeeRole;
 };
 
 /**
@@ -49,4 +71,5 @@ module.exports = {
   queryEmployeeRoles,
   getEmployeeRoleById,
   deleteEmployeeRolesById,
+  updateEmployeeRoleById,
 };
