@@ -24,7 +24,7 @@ const queryEmployee = catchAsync(async (req, res) => {
 const getEmployee = catchAsync(async (req, res) => {
   const employee = await Service.getEmployeeById(req.params.id);
   if (!employee) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Employee Project not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Employee not found');
   }
   res.send(employee);
 });

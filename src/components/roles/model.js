@@ -3,8 +3,6 @@ const { toJSON, paginate } = require('../../plugins');
 
 const RolesSchema = mongoose.Schema(
   {
-    _id: Number,
-
     title: {
       type: String,
       required: true,

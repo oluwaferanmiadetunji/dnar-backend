@@ -30,8 +30,8 @@ const updateEmployeeRole = {
   }),
   body: Joi.object()
     .keys({
-      role_id: Joi.number().integer().required(),
-      employee_id: Joi.number().integer().required(),
+      role_id: Joi.number().integer(),
+      employee_id: Joi.number().integer(),
     })
     .min(1),
 };
