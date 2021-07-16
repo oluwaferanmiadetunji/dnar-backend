@@ -3,8 +3,8 @@ const { objectId } = require('../../utils/validation');
 
 const createEmployeeProject = {
   body: Joi.object().keys({
-    project_id: Joi.number().integer().required(),
-    employee_id: Joi.number().integer().required(),
+    project_id: Joi.any().required(),
+    employee_id: Joi.any().required(),
   }),
 };
 
@@ -16,8 +16,8 @@ const getEmployeeProject = {
 
 const queryEmployeeProjects = {
   query: Joi.object().keys({
-    project_id: Joi.number().integer(),
-    employee_id: Joi.number().integer(),
+    project_id: Joi.any(),
+    employee_id: Joi.any(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -30,8 +30,8 @@ const updateEmployeeProject = {
   }),
   body: Joi.object()
     .keys({
-      project_id: Joi.number().integer(),
-      employee_id: Joi.number().integer(),
+      project_id: Joi.any(),
+      employee_id: Joi.any(),
     })
     .min(1),
 };

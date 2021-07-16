@@ -35,7 +35,7 @@ const queryEmployees = async (filter, options) => {
  * @returns {Promise<Model>}
  */
 const getEmployeeById = async (id) => {
-  return Model.findById(id).exec();
+  return Model.findById(id);
 };
 
 /**

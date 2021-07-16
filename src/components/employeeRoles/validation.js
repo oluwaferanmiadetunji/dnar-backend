@@ -3,8 +3,8 @@ const { objectId } = require('../../utils/validation');
 
 const createEmployeeRole = {
   body: Joi.object().keys({
-    role_id: Joi.number().integer().required(),
-    employee_id: Joi.number().integer().required(),
+    role_id: Joi.any().required(),
+    employee_id: Joi.any().required(),
   }),
 };
 
@@ -16,8 +16,8 @@ const getEmployeeRole = {
 
 const queryEmployeeRoles = {
   query: Joi.object().keys({
-    role_id: Joi.number().integer(),
-    employee_id: Joi.number().integer(),
+    role_id: Joi.any(),
+    employee_id: Joi.any(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -30,8 +30,8 @@ const updateEmployeeRole = {
   }),
   body: Joi.object()
     .keys({
-      role_id: Joi.number().integer(),
-      employee_id: Joi.number().integer(),
+      role_id: Joi.any(),
+      employee_id: Joi.any(),
     })
     .min(1),
 };
