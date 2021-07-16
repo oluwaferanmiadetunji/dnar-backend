@@ -8,6 +8,7 @@
   "scripts": {
     "start": "pm2 start ecosystem.config.json --no-daemon",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "test": "jest --runInBand ./test",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check **/*.js",
@@ -37,11 +38,10 @@
     "helmet": "^4.1.0",
     "http-status": "^1.4.0",
     "joi": "^17.3.0",
+    "mocha": "^9.0.2",
     "mongoose": "^5.7.7",
     "morgan": "^1.9.1",
     "pm2": "^4.1.2",
-    "swagger-jsdoc": "4.2.0",
-    "swagger-ui-express": "4.1.4",
     "validator": "^13.0.0",
     "winston": "^3.2.1",
     "xss-clean": "^0.1.1"
@@ -58,5 +58,8 @@
     "lint-staged": "^10.0.7",
     "nodemon": "^2.0.0",
     "prettier": "^2.0.5"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

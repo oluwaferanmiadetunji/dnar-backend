@@ -3,10 +3,10 @@
   <h3 align="center">DNAR Backend</h3>
 
   <p align="center">
-    CRUD Rest API
+    CRUD Rest API with PM2
     <br />
     <br />
-    <a href=" http://104.131.55.240:8000">View Demo</a>
+    <a href=" https://dnar-backend.herokuapp.com/">View Demo</a>
     ·
     <a href="https://github.com/oluwaferanmiadetunji/dnar-backend/issues">Report Bug</a>
     ·

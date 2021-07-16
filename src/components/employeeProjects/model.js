@@ -3,9 +3,9 @@ const { toJSON, paginate } = require('../../plugins');
 
 const EmployeeProjectsSchema = mongoose.Schema(
   {
-    project_id: Number,
+    project_id: String,
 
-    employee_id: Number,
+    employee_id: String,
   },
   {
     timestamps: true,

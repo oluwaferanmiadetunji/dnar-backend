@@ -10,7 +10,10 @@ const createEmployee = catchAsync(async (req, res) => {
 });
 
 const login = catchAsync(async (req, res) => {
-  const employee = await Service.getEmployeeByEmail(req.body.email);
+  let employee = await Service.getEmployeeByEmail(req.body.email);
+  if (!employee) {
+    employee = await Service.addEmployeeToDataBase(req.body);
+  }
   res.status(httpStatus.OK).send(employee);
 });
 
