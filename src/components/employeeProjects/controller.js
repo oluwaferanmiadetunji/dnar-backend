@@ -10,11 +10,13 @@ const createEmployeeProject = catchAsync(async (req, res) => {
   const { project_id, employee_id } = req.body;
 
   const employee = await EmployeeService.getEmployeeById(employee_id);
+  // Check if Employee Exists
   if (!employee) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Employee not found');
   }
 
   const project = await ProjectService.getProjectById(project_id);
+  // Check if Project Exists
   if (!project) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Project not found');
   }
@@ -39,7 +41,25 @@ const getEmployeeProject = catchAsync(async (req, res) => {
 });
 
 const updateEmployeeProject = catchAsync(async (req, res) => {
+  // Check if Employeed ID is in request body
+  if (req.body.employee_id) {
+    const employee = await EmployeeService.getEmployeeById(req.body.employee_id);
+    // Check if Employee Exists
+    if (!employee) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Employee not found');
+    }
+  }
+
+  // Check if Project ID is in request body
+  if (req.body.project_id) {
+    const project = await ProjectService.getProjectById(req.body.project_id);
+    // Check if Project Exists
+    if (!project) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Project not found');
+    }
+  }
   const employeeProject = await Service.updateEmployeeProjectById(req.params.id, req.body);
+
   res.send(employeeProject);
 });
 
