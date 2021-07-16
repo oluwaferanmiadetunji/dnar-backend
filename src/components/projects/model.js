@@ -3,8 +3,6 @@ const { toJSON, paginate } = require('../../plugins');
 
 const projectsSchema = mongoose.Schema(
   {
-    _id: Number,
-
     name: {
       type: String,
       required: true,
@@ -21,7 +19,6 @@ const projectsSchema = mongoose.Schema(
     timestamps: true,
   },
 );
-
 
 projectsSchema.plugin(toJSON);
 projectsSchema.plugin(paginate);

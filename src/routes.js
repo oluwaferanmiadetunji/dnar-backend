@@ -3,6 +3,7 @@ const config = require('./config/config');
 const { Route: EmployeeProjectRoute } = require('./components/employeeProjects');
 const { Route: EmployeeRoleRoute } = require('./components/employeeRoles');
 const { Route: EmployeeRoute } = require('./components/employees');
+const { Route: ProjectRoute } = require('./components/projects');
 const docsRoute = require('./docs/route');
 
 const router = express.Router();
@@ -19,6 +20,10 @@ const defaultRoutes = [
   {
     path: '/employee',
     route: EmployeeRoute,
+  },
+  {
+    path: '/project',
+    route: ProjectRoute,
   },
 ];
 

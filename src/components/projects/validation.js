@@ -1,51 +1,51 @@
 const Joi = require('joi');
 const { objectId } = require('../../utils/validation');
 
-const createEmployeeProject = {
+const createProject = {
   body: Joi.object().keys({
-    project_id: Joi.number().integer().required(),
-    employee_id: Joi.number().integer().required(),
+    name: Joi.string().required(),
+    description: Joi.string().required(),
   }),
 };
 
-const getEmployeeProject = {
+const getProject = {
   params: Joi.object().keys({
     id: Joi.string().required().custom(objectId),
   }),
 };
 
-const queryEmployeeProjects = {
+const queryProjects = {
   query: Joi.object().keys({
-    project_id: Joi.number().integer(),
-    employee_id: Joi.number().integer(),
+    name: Joi.string(),
+    description: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
   }),
 };
 
-const updateEmployeeProject = {
+const updateProject = {
   params: Joi.object().keys({
     id: Joi.string().required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
-      project_id: Joi.number().integer().required(),
-      employee_id: Joi.number().integer().required(),
+      name: Joi.string(),
+      description: Joi.string(),
     })
     .min(1),
 };
 
-const deleteEmployeeProject = {
+const deleteProject = {
   params: Joi.object().keys({
     id: Joi.string().required().custom(objectId),
   }),
 };
 
 module.exports = {
-  createEmployeeProject,
-  queryEmployeeProjects,
-  updateEmployeeProject,
-  deleteEmployeeProject,
-  getEmployeeProject,
+  createProject,
+  queryProjects,
+  updateProject,
+  deleteProject,
+  getProject,
 };

@@ -31,7 +31,6 @@ module.exports = router;
  *  /employee-projects:
  *    post:
  *      summary: Add employee project to database
- *      description: Only admins can create other users.
  *      tags: [EmployeeProjects]
  *      security:
  *        - bearerAuth: []

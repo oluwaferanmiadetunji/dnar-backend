@@ -15,7 +15,7 @@ const login = catchAsync(async (req, res) => {
 });
 
 const queryEmployee = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['project_id', 'employee_id']);
+  const filter = pick(req.query, ['first_name', 'last_name', 'email', 'country']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await Service.queryEmployees(filter, options);
   res.send(result);

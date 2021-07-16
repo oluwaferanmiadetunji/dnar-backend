@@ -7,32 +7,31 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(validate(Validation.createEmployeeProject), Controller.createEmployeeProject)
-  .get(validate(Validation.queryEmployeeProjects), Controller.queryEmployeeProjects);
+  .post(validate(Validation.createProject), Controller.createProject)
+  .get(validate(Validation.queryProjects), Controller.queryProjects);
 
 router
   .route('/:id')
-  .get(validate(Validation.getEmployeeProject), Controller.getEmployeeProject)
-  .patch(validate(Validation.updateEmployeeProject), Controller.updateEmployeeProject)
-  .delete(validate(Validation.deleteEmployeeProject), Controller.deleteEmployeeProject);
+  .get(validate(Validation.getProject), Controller.getProject)
+  .patch(validate(Validation.updateProject), Controller.updateProject)
+  .delete(validate(Validation.deleteProject), Controller.deleteProject);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Employee Projects
- *   description: Employee Projects management and retrieval
+ *   name: Projects
+ *   description: Projects management and retrieval
  */
 
 /**
  * @swagger
  * path:
- *  /employee-projects:
+ *  /project:
  *    post:
- *      summary: Add employee project to database
- *      description: Only admins can create other users.
- *      tags: [EmployeeProjects]
+ *      summary: Add project to database
+ *      tags: [Projects]
  *      security:
  *        - bearerAuth: []
  *      requestBody:
@@ -42,44 +41,44 @@ module.exports = router;
  *            schema:
  *              type: object
  *              required:
- *                - project_id
- *                - employee_id
+ *                - name
+ *                - description
  *              properties:
- *                project_id:
- *                  type: int
- *                employee_id:
- *                  type: int
+ *                name:
+ *                  type: string
+ *                description:
+ *                  type: string
  *              example:
- *                project_id: 1
- *                employee_id: 1
+ *                name: fake name
+ *                description: fake description
  *      responses:
  *        "201":
  *          description: Created
  *          content:
  *            application/json:
  *              schema:
- *                 $ref: '#/components/schemas/EmployeeProjects'
+ *                 $ref: '#/components/schemas/Projects'
  *        "401":
  *          $ref: '#/components/responses/Unauthorized'
  *        "403":
  *          $ref: '#/components/responses/Forbidden'
  *
  *    get:
- *      summary: Get all Employee Projects
- *      tags: [EmployeeProjects]
+ *      summary: Get all  Projects
+ *      tags: [Projects]
  *      security:
  *        - bearerAuth: []
  *      parameters:
  *        - in: query
- *          name: project_id
+ *          name: name
  *          schema:
- *            type: int
- *          description: Project ID
+ *            type: string
+ *          description: Project Name
  *        - in: query
- *          name: employee_id
+ *          name: description
  *          schema:
- *            type: int
- *          description: Employee ID
+ *            type: string
+ *          description: Project Description
  *        - in: query
  *          name: sortBy
  *          schema:
@@ -91,7 +90,7 @@ module.exports = router;
  *            type: integer
  *            minimum: 1
  *          default: 10
- *          description: Maximum number of employee projects
+ *          description: Maximum number of projects
  *        - in: query
  *          name: page
  *          schema:
@@ -110,7 +109,7 @@ module.exports = router;
  *                  results:
  *                    type: array
  *                    items:
- *                      $ref: '#/components/schemas/EmployeeProjects'
+ *                      $ref: '#/components/schemas/Projects'
  *                  page:
  *                    type: integer
  *                    example: 1
@@ -132,10 +131,10 @@ module.exports = router;
 /**
  * @swagger
  * path:
- *  /employee-projects/{id}:
+ *  /project/{id}:
  *    get:
- *      summary: Get an employee project
- *      tags: [EmployeeProjects]
+ *      summary: Get an project
+ *      tags: [Projects]
  *      security:
  *        - bearerAuth: []
  *      parameters:
@@ -144,14 +143,14 @@ module.exports = router;
  *          required: true
  *          schema:
  *            type: string
- *          description: Employee project id
+ *          description: Project id
  *      responses:
  *        "200":
  *          description: OK
  *          content:
  *            application/json:
  *              schema:
- *                 $ref: '#/components/schemas/EmployeeProject'
+ *                 $ref: '#/components/schemas/Project'
  *        "401":
  *          $ref: '#/components/responses/Unauthorized'
  *        "403":
@@ -160,8 +159,8 @@ module.exports = router;
  *          $ref: '#/components/responses/NotFound'
  *
  *    patch:
- *      summary: Update an employee project
- *      tags: [EmployeeProjects]
+ *      summary: Update a project
+ *      tags: [Projects]
  *      security:
  *        - bearerAuth: []
  *      parameters:
@@ -170,7 +169,7 @@ module.exports = router;
  *          required: true
  *          schema:
  *            type: string
- *          description: User id
+ *          description: Project id
  *      requestBody:
  *        required: true
  *        content:
@@ -178,20 +177,20 @@ module.exports = router;
  *            schema:
  *              type: object
  *              properties:
- *               project_id:
- *                  type: int
- *                employee_id:
- *                  type: int
+ *              name:
+ *                  type: string
+ *                description:
+ *                  type: string
  *              example:
- *                 project_id: 1
- *                employee_id: 1
+ *                 name: fake name
+ *                description: fake description
  *      responses:
  *        "200":
  *          description: OK
  *          content:
  *            application/json:
  *              schema:
- *                 $ref: '#/components/schemas/EmployeeProjects'
+ *                 $ref: '#/components/schemas/Projects'
  *        "401":
  *          $ref: '#/components/responses/Unauthorized'
  *        "403":
@@ -200,8 +199,8 @@ module.exports = router;
  *          $ref: '#/components/responses/NotFound'
  *
  *    delete:
- *      summary: Delete an employee project
- *      tags: [EmployeeProjects]
+ *      summary: Delete a project
+ *      tags: [Projects]
  *      security:
  *        - bearerAuth: []
  *      parameters:
