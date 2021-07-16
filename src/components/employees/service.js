@@ -17,10 +17,15 @@ const addEmployeeToDataBase = async (body) => {
 
 /**
  * Get all employees
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const queryEmployees = async () => {
-  const employees = await Model.find({}, 'first_name last_name email country').exec();
+const queryEmployees = async (filter, options) => {
+  const employees = await Model.paginate(filter, options);
   return employees;
 };
 

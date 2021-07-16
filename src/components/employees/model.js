@@ -4,8 +4,6 @@ const { toJSON, paginate } = require('../../plugins');
 
 const employeeSchema = mongoose.Schema(
   {
-    // _id: Number,
-
     first_name: {
       type: String,
       trim: true,
