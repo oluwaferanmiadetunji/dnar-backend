@@ -20,4 +20,6 @@ router.route('/login').post(validate(Validation.login), Controller.login);
 
 router.route('/:id/assign-project').post(validate(Validation.assignProjectToEmployee), Controller.assignProjectToEmployee);
 
+router.route('/:id/remove-project').post(validate(Validation.assignProjectToEmployee), Controller.removeProjectFromEmployee);
+
 module.exports = router;

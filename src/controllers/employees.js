@@ -60,7 +60,7 @@ const assignProjectToEmployee = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Employee does not exist');
   }
 
-  // Check if employee was already assigned the project 
+  // Check if employee was already assigned the project
   const hasAssignedProject = await EmployeeProjectService.getEmployeeProjectsByEmployeeIdAndProjectID(employee_id, project_id);
 
   // If employee has been assigned the project, throw an error
@@ -72,6 +72,40 @@ const assignProjectToEmployee = catchAsync(async (req, res) => {
   const employeeProject = await EmployeeProjectService.createEmployeeProject({ employee_id, project_id });
 
   res.status(httpStatus.OK).send(employeeProject);
+});
+
+const removeProjectFromEmployee = catchAsync(async (req, res) => {
+  const employee_id = req.params.id;
+  const project_id = req.body.project_id;
+
+  // Check if employee exists
+  const employeeExists = await EmployeeService.getEmployeeById(employee_id);
+
+  // If employee doesn't exist, throw an error
+  if (!employeeExists) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Employee does not exist');
+  }
+
+  // Check if project exists
+  const projectExists = await ProjectService.getProjectById(project_id);
+
+  // If project doesn't exist, throw an error
+  if (!projectExists) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Employee does not exist');
+  }
+
+  // Check if employee was already assigned the project
+  const hasAssignedProject = await EmployeeProjectService.getEmployeeProjectsByEmployeeIdAndProjectID(employee_id, project_id);
+
+  // If employee was not assigned the project, throw an error
+  if (!hasAssignedProject) {
+    throw new ApiError(httpStatus.NOT_ACCEPTABLE, 'Employee was not assigned the project');
+  }
+
+  // Else, remove project from employee
+  await EmployeeProjectService.deleteEmployeeProjectByEmployeeId(employee_id);
+
+  res.status(httpStatus.NO_CONTENT).send();
 });
 
 const queryEmployee = catchAsync(async (req, res) => {
@@ -148,4 +182,5 @@ module.exports = {
   deleteEmployee,
   login,
   assignProjectToEmployee,
+  removeProjectFromEmployee,
 };

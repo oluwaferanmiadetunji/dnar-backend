@@ -84,6 +84,20 @@ const deleteEmployeeProjectById = async (id) => {
   return employeeProject;
 };
 
+/**
+ * Delete employee project by employee id
+ * @param {String} id
+ * @returns {Promise<Model>}
+ */
+const deleteEmployeeProjectByEmployeeId = async (employee_id) => {
+  const employeeProject = await Model.findOne({ employee_id });
+  if (!employeeProject) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Employee Project not found');
+  }
+  await employeeProject.remove();
+  return employeeProject;
+};
+
 module.exports = {
   createEmployeeProject,
   queryEmployeeProjects,
@@ -92,4 +106,5 @@ module.exports = {
   updateEmployeeProjectById,
   getEmployeeProjectsByEmployeeId,
   getEmployeeProjectsByEmployeeIdAndProjectID,
+  deleteEmployeeProjectByEmployeeId,
 };
