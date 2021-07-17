@@ -36,6 +36,15 @@ const getEmployeeProjectById = async (id) => {
 };
 
 /**
+ * Get an employee role by employee id
+ * @param {Number} id
+ * @returns {Promise<Model>}
+ */
+const getEmployeeProjectsByEmployeeId = async (id) => {
+  return Model.find({ employee_id: id }, 'role_id').exec();
+};
+
+/**
  * Update employee project by id
  * @param {ObjectId} id
  * @param {Object} body
@@ -72,4 +81,5 @@ module.exports = {
   getEmployeeProjectById,
   deleteEmployeeProjectById,
   updateEmployeeProjectById,
+  getEmployeeProjectsByEmployeeId,
 };

@@ -3,10 +3,11 @@ const { objectId } = require('../../utils/validation');
 
 const createEmployee = {
   body: Joi.object().keys({
-    first_name: Joi.string(),
-    last_name: Joi.string(),
-    country: Joi.string(),
+    first_name: Joi.string().required(),
+    last_name: Joi.string().required(),
+    country: Joi.string().required(),
     email: Joi.string().required().email(),
+    role_id: Joi.string().required(),
   }),
 };
 
@@ -44,6 +45,7 @@ const updateEmployee = {
       last_name: Joi.string(),
       email: Joi.string(),
       country: Joi.string(),
+      role_id: Joi.string(),
     })
     .min(1),
 };
