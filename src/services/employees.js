@@ -39,6 +39,14 @@ const getEmployeeById = async (id) => {
 };
 
 /**
+ * Get anll employees
+ * @returns {Promise<Model>}
+ */
+const getEmployees = async (id) => {
+  return Model.find({ id });
+};
+
+/**
  * Get an employee by email
  * @param {string} email
  * @returns {Promise<Model>}
@@ -91,4 +99,5 @@ module.exports = {
   getEmployeeByEmail,
   updateEmployeeById,
   deleteEmployeeById,
+  getEmployees,
 };

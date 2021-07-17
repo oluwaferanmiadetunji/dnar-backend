@@ -115,6 +115,35 @@ const queryEmployee = catchAsync(async (req, res) => {
   res.send(result);
 });
 
+const getAllEmployees = catchAsync(async (req, res) => {
+  let allEmployeeData = [];
+  const employees = await EmployeeService.getEmployees();
+
+  for (let i = 0; i < employees.length; i++) {
+    const employeeID = employees[i].id;
+
+    let employeeData = {};
+    // Check if employee exists
+    const employee = await EmployeeService.getEmployeeById(employeeID);
+    employeeData.data = employee;
+    
+    // Check if role exists
+    const role = await EmployeeRoleService.getEmployeeRoleByEmployeeId(employeeID);
+    if (role) {
+      employeeData.role = role.role_id;
+    }
+
+    // Check if employee has projects
+    const projects = await EmployeeProjectService.getEmployeeProjectsByEmployeeId(employeeID);
+
+    employeeData.projects = projects;
+
+    allEmployeeData.push(employeeData);
+  }
+
+  res.send(allEmployeeData);
+});
+
 const getEmployee = catchAsync(async (req, res) => {
   const employeeID = req.params.id;
 
@@ -183,4 +212,5 @@ module.exports = {
   login,
   assignProjectToEmployee,
   removeProjectFromEmployee,
+  getAllEmployees,
 };

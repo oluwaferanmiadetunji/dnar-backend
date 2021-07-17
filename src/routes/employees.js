@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .post(validate(Validation.createEmployee), Controller.createEmployee)
-  .get(validate(Validation.queryEmployee), Controller.queryEmployee);
+  .get(validate(Validation.queryEmployee), Controller.getAllEmployees);
 
 router
   .route('/:id')
