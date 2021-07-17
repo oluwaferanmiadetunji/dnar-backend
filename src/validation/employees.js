@@ -23,6 +23,15 @@ const getEmployee = {
   }),
 };
 
+const assignProjectToEmployee = {
+  params: Joi.object().keys({
+    id: Joi.string().required().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    project_id: Joi.any().required(),
+  }),
+};
+
 const queryEmployee = {
   query: Joi.object().keys({
     first_name: Joi.string(),
@@ -41,11 +50,10 @@ const updateEmployee = {
   }),
   body: Joi.object()
     .keys({
-      first_name: Joi.string(),
-      last_name: Joi.string(),
-      email: Joi.string(),
-      country: Joi.string(),
-      role_id: Joi.string(),
+      first_name: Joi.string().required(),
+      last_name: Joi.string().required(),
+      country: Joi.string().required(),
+      role_id: Joi.string().required(),
     })
     .min(1),
 };
@@ -63,4 +71,5 @@ module.exports = {
   deleteEmployee,
   getEmployee,
   login,
+  assignProjectToEmployee,
 };

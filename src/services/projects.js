@@ -28,7 +28,7 @@ const queryProjects = async (filter, options) => {
 
 /**
  * Get a project by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const getProjectById = async (id) => {
@@ -37,7 +37,7 @@ const getProjectById = async (id) => {
 
 /**
  * Update project by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @param {Object} body
  * @returns {Promise<Model>}
  */
@@ -56,7 +56,7 @@ const updateProjectById = async (id, body) => {
 
 /**
  * Delete project by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const deleteProjectById = async (id) => {

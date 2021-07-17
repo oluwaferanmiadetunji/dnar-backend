@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const Model = require('../models/roles');
+const Model = require('../models/employee.roles');
 const ApiError = require('../utils/ApiError');
 const RoleService = require('./roles');
 const EmployeesService = require('./employees');
@@ -40,7 +40,7 @@ const queryEmployeeRoles = async (filter, options) => {
 
 /**
  * Get an employee role by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const getEmployeeRoleById = async (id) => {
@@ -49,7 +49,7 @@ const getEmployeeRoleById = async (id) => {
 
 /**
  * Get an employee role by employee id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const getEmployeeRoleByEmployeeId = async (id) => {
@@ -74,8 +74,26 @@ const updateEmployeeRoleById = async (id, body) => {
 };
 
 /**
+ * Update employee role by employee id
+ * @param {ObjectId} id
+ * @param {Object} body
+ * @returns {Promise<Model>}
+ */
+const updateEmployeeRoleByEmployeeId = async (id, body) => {
+  let employeeRole = await getEmployeeRoleByEmployeeId(id);
+  if (!employeeRole) {
+    employeeRole = await Model.create(body);
+  } else {
+    Object.assign(employeeRole, body);
+    await employeeRole.save();
+  }
+
+  return employeeRole;
+};
+
+/**
  * Delete employee role by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const deleteEmployeeRolesById = async (id) => {
@@ -94,4 +112,5 @@ module.exports = {
   deleteEmployeeRolesById,
   updateEmployeeRoleById,
   getEmployeeRoleByEmployeeId,
+  updateEmployeeRoleByEmployeeId,
 };

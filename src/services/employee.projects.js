@@ -28,7 +28,7 @@ const queryEmployeeProjects = async (filter, options) => {
 
 /**
  * Get an employee project by id
- * @param {Number} id
+ * @param {String} id
  * @returns {Promise<Model>}
  */
 const getEmployeeProjectById = async (id) => {
@@ -37,11 +37,20 @@ const getEmployeeProjectById = async (id) => {
 
 /**
  * Get an employee role by employee id
- * @param {Number} id
+ * @param {String} id
  * @returns {Promise<Model>}
  */
 const getEmployeeProjectsByEmployeeId = async (id) => {
-  return Model.find({ employee_id: id }, 'role_id').exec();
+  return Model.find({ employee_id: id }, 'project_id').exec();
+};
+
+/**
+ * Get an employee role by employee id and project id
+ * @param {String} id
+ * @returns {Promise<Model>}
+ */
+const getEmployeeProjectsByEmployeeIdAndProjectID = async (employee_id, project_id) => {
+  return Model.findOne({ employee_id, project_id }).exec();
 };
 
 /**
@@ -63,7 +72,7 @@ const updateEmployeeProjectById = async (id, body) => {
 
 /**
  * Delete employee project by id
- * @param {Number} id
+ * @param {String} id
  * @returns {Promise<Model>}
  */
 const deleteEmployeeProjectById = async (id) => {
@@ -82,4 +91,5 @@ module.exports = {
   deleteEmployeeProjectById,
   updateEmployeeProjectById,
   getEmployeeProjectsByEmployeeId,
+  getEmployeeProjectsByEmployeeIdAndProjectID,
 };

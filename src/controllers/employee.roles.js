@@ -9,18 +9,23 @@ const { Service: EmployeeService } = require('../services/employees');
 const createEmployeeRole = catchAsync(async (req, res) => {
   const { role_id, employee_id } = req.body;
 
-  const employee = await EmployeeService.getEmployeeById(employee_id);
   // Check if Employee Exists
+  const employee = await EmployeeService.getEmployeeById(employee_id);
+
+  // If Employee doesn't exist, throw an error
   if (!employee) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Employee not found');
   }
 
-  const role = await RoleService.getRoleById(role_id);
   // Check if role Exists
+  const role = await RoleService.getRoleById(role_id);
+
+  // If role doesn't exist, throw an error
   if (!role) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Role not found');
   }
 
+  // create employee-role
   const employeeRole = await EmployeeRoleService.createEmployeeRole(req.body);
   res.status(httpStatus.CREATED).send(employeeRole);
 });
@@ -43,8 +48,10 @@ const getEmployeeRole = catchAsync(async (req, res) => {
 const updateEmployeeRole = catchAsync(async (req, res) => {
   // Check if Employeed ID is in request body
   if (req.body.employee_id) {
-    const employee = await EmployeeService.getEmployeeById(req.body.employee_id);
     // Check if Employee Exists
+    const employee = await EmployeeService.getEmployeeById(req.body.employee_id);
+
+    // If Employee doesn't exist, throw an error
     if (!employee) {
       throw new ApiError(httpStatus.NOT_FOUND, 'Employee not found');
     }
@@ -52,14 +59,17 @@ const updateEmployeeRole = catchAsync(async (req, res) => {
 
   // Check if Role ID is in request body
   if (req.body.role_id) {
-    const role = await RoleService.getRoleById(req.body.role_id);
     // Check if role Exists
+    const role = await RoleService.getRoleById(req.body.role_id);
+
+    // If role doesn't exist, throw an error
     if (!role) {
       throw new ApiError(httpStatus.NOT_FOUND, 'Role not found');
     }
   }
-
+  // update employee-role
   const employeeRole = await EmployeeRoleService.updateEmployeeRoleById(req.params.id, req.body);
+  
   res.send(employeeRole);
 });
 

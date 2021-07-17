@@ -28,7 +28,7 @@ const queryRoles = async (filter, options) => {
 
 /**
  * Get a role by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const getRoleById = async (id) => {
@@ -37,7 +37,7 @@ const getRoleById = async (id) => {
 
 /**
  * Update role by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @param {Object} body
  * @returns {Promise<Model>}
  */
@@ -56,7 +56,7 @@ const updateRoleById = async (id, body) => {
 
 /**
  * Delete role by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const deleteRoleById = async (id) => {

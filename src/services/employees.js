@@ -31,7 +31,7 @@ const queryEmployees = async (filter, options) => {
 
 /**
  * Get an employee by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const getEmployeeById = async (id) => {
@@ -49,7 +49,7 @@ const getEmployeeByEmail = async (email) => {
 
 /**
  * Update employee by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @param {Object} body
  * @returns {Promise<Model>}
  */
@@ -72,7 +72,7 @@ const updateEmployeeById = async (id, body) => {
 
 /**
  * Delete employee by id
- * @param {Number} id
+ * @param {ObjectId} id
  * @returns {Promise<Model>}
  */
 const deleteEmployeeById = async (id) => {
