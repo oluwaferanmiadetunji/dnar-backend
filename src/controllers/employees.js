@@ -91,7 +91,7 @@ const removeProjectFromEmployee = catchAsync(async (req, res) => {
 
   // If project doesn't exist, throw an error
   if (!projectExists) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Employee does not exist');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Project does not exist');
   }
 
   // Check if employee was already assigned the project
